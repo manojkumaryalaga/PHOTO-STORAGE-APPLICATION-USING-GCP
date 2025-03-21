@@ -112,7 +112,7 @@ def index():
 
     html=f"""
         <html>
-        <body>
+        <body style='background-color: skyblue;'>
             <h2>Upload an Image for Captioning</h2>
             <form method="post" enctype="multipart/form-data">
                 <label for="file">Choose an image (JPEG/PNG):</label>
