@@ -43,46 +43,46 @@ def generate_description(image):
     part = ["Give me a simple one line title and a one line of description for this Image", Image.open(image)]
     response = model.generate_content(part)
     print(response.text)
-    l=response.text.split("\n")
-    print(l,len(l))
-    title,description="",""
+    l = response.text.split("\n")
+    print(l, len(l))
+    title, description = "", ""
     try:
-        if len(l)==3:
-            title=l[0].split(":")[1]
-            description=l[2].split(":")[1]
-            print(title,description)
-            upload_json(image,title,description)
-        elif len(l)==2:
-            title=l[0].split(":")[1]
-            description=l[1].split(":")[1]
-            print(title,description)
-            upload_json(image,title,description)
-        elif len(l)==4:
-            title=l[2].split(":")[1]
-            description=l[3].split(":")[1]
-            print(title,description)
-            upload_json(image,title,description)
-        elif len(l)==5:
-            title=l[2].split(":")[1]
-            description=l[4].split(":")[1]
-            print(title,description)
-            upload_json(image,title,description)
-        elif len(l)==6:
-            title=l[2].split(":")[1]
-            description=l[4].split(":")[1]
-            print(title,description)
-            upload_json(image,title,description)
+        if len(l) == 3:
+            title = l[0].split(":")[1]
+            description = l[2].split(":")[1]
+            print(title, description)
+            upload_json(image, title, description)
+        elif len(l) == 2:
+            title = l[0].split(":")[1]
+            description = l[1].split(":")[1]
+            print(title, description)
+            upload_json(image, title, description)
+        elif len(l) == 4:
+            title = l[2].split(":")[1]
+            description = l[3].split(":")[1]
+            print(title, description)
+            upload_json(image, title, description)
+        elif len(l) == 5:
+            title = l[2].split(":")[1]
+            description = l[4].split(":")[1]
+            print(title, description)
+            upload_json(image, title, description)
+        elif len(l) == 6:
+            title = l[2].split(":")[1]
+            description = l[4].split(":")[1]
+            print(title, description)
+            upload_json(image, title, description)
         else:
             generate_description(image)
     except Exception as e:
         generate_description(image)
     print("-----")
-    print(title,description)
-    
-def upload_json(image,title,description):
-    dictionary={"title":title,"description":description}
+    print(title, description)
+
+def upload_json(image, title, description):
+    dictionary = {"title": title, "description": description}
     json_object = json.dumps(dictionary, indent=4)
- 
+
     with open(image.filename.rsplit(".", 1)[0] + ".json", "w") as outfile:
         outfile.write(json_object)
     bucket = storage_client.bucket(BUCKET_NAME)
@@ -103,16 +103,16 @@ def index():
         if "file" not in request.files:
             return "No file uploaded", 400
         file = request.files["file"]
-        
+
         # Upload image to Cloud Storage
         upload_to_gcs(file)
-        
-        # Generate title & description using Gemini AI
-        generate_description(file)     
 
-    html=f"""
+        # Generate title & description using Gemini AI
+        generate_description(file)
+
+    html = f"""
         <html>
-        <body style='background-color: blue; color: white;'>
+        <body style='background-color: green; color: white;'>
             <h2>Upload an Image for Captioning</h2>
             <form method="post" enctype="multipart/form-data">
                 <label for="file">Choose an image (JPEG/PNG):</label>
@@ -120,46 +120,52 @@ def index():
                 <br />
                 <button type="submit">Upload</button>
             </form>
+            <br />
+            <h3>Uploaded Images:</h3>
+            <div style="color: white;">
+    """
+
+    l = fetchallfiles()
+    for i in l:
+        html += f" <a href='/files/{i}' style='color: white; text-decoration: none;'>{i}</a><br>"
+
+    html += """
+        </div>
         </body>
         </html>
     """
-    l=fetchallfiles()
-    for i in l:
-        html+=f" <a href='/files/{i}'>{i}</a><br>"
     return html
 
 
 @app.route("/files/<filename>")
 def fetchfile(filename):
-    file_name=filename
-    bucket=storage_client.bucket(BUCKET_NAME)
-    blob=bucket.blob(filename.rsplit(".", 1)[0] + ".json")
-    file_content=None
+    file_name = filename
+    bucket = storage_client.bucket(BUCKET_NAME)
+    blob = bucket.blob(filename.rsplit(".", 1)[0] + ".json")
+    file_content = None
     with blob.open("r") as obj:
-        file_content=obj.read()
-    file_content=json.loads(file_content)
-    # print(file_content,type(file_content))
-    title=file_content["title"]
-    description=file_content["description"]
-    html=f"""
+        file_content = obj.read()
+    file_content = json.loads(file_content)
+    title = file_content["title"]
+    description = file_content["description"]
+    html = f"""
     <h1>{file_name} </h1>
     <img src='/images/{file_name}' width="25%">
     <p>title:{title}</p>
     <p>description:{description}</p>
-
     """
     return html
 
 @app.route("/images/<imagename>")
 def images(imagename):
-    bucket=storage_client.bucket(BUCKET_NAME)
-    blob=bucket.blob(imagename)
-    data=blob.download_as_bytes()
-    return Response(io.BytesIO(data),mimetype="image/jpeg")
+    bucket = storage_client.bucket(BUCKET_NAME)
+    blob = bucket.blob(imagename)
+    data = blob.download_as_bytes()
+    return Response(io.BytesIO(data), mimetype="image/jpeg")
 
 def fetchallfiles():
-    l= list()
-    images=storage_client.list_blobs(BUCKET_NAME)
+    l = list()
+    images = storage_client.list_blobs(BUCKET_NAME)
     for i in images:
         if i.name.lower().endswith(".jpeg") or i.name.lower().endswith(".png") or i.name.lower().endswith(".jpg"):
             l.append(i.name)
