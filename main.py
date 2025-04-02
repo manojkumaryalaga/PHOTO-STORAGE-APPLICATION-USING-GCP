@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template_string,Response
+from flask import Flask, request, render_template_string, Response
 from google.cloud import storage
 import google.generativeai as genai
 from PIL import Image
@@ -112,7 +112,7 @@ def index():
 
     html=f"""
         <html>
-        <body style='background-color: green;'>
+        <body style='background-color: blue; color: white;'>
             <h2>Upload an Image for Captioning</h2>
             <form method="post" enctype="multipart/form-data">
                 <label for="file">Choose an image (JPEG/PNG):</label>
