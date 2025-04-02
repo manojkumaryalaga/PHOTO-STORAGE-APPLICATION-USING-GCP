@@ -127,7 +127,7 @@ def index():
 
     l = fetchallfiles()
     for i in l:
-        html += f" <a href='/files/{i}' style='color: white; text-decoration: none;'>{i}</a><br>"
+        html += f" <a href='/files/{i}' style='color: white; text-decoration: underline;'>{i}</a><br>"
 
     html += """
         </div>
