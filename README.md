@@ -50,6 +50,141 @@ This automation streamlines development and ensures efficient, hands-free update
 ![Architecture Diagram](screenshots/Picture1.jpg)
 ---
 
+## 🔄 Application Workflow (Component-Wise Explanation)
+
+### 🧑‍💻 Users → Cloud Run: Upload Images
+Users interact with the web application to upload images through a simple interface.  
+**Importance:** This is the starting point of the workflow. Without user-uploaded images, no processing can begin.
+
+---
+
+### ☁️ Cloud Run → Google Cloud Storage (Bucket): Store Images and Metadata
+Cloud Run stores uploaded images in Google Cloud Storage. Metadata (title and description from Gemini API) is stored as a JSON file alongside the image.  
+**Importance:** Centralized and scalable storage solution for both files and metadata.
+
+---
+
+### 🤖 Cloud Run → Gemini API: Request Metadata Generation
+Cloud Run sends the image to Gemini API to generate AI-based title and description.  
+**Importance:** Adds contextual information to each image, improving user experience and searchability.
+
+---
+
+### 🔁 Gemini API → Cloud Run: Return Metadata
+Gemini returns the generated metadata (title + description) back to Cloud Run.  
+**Importance:** This metadata is stored in GCS to complete the upload cycle with content and context.
+
+---
+
+### 🔐 Cloud Run → IAM: Grant Permissions to GCS and Gemini API
+IAM policies allow Cloud Run to interact with both GCS and Gemini API.  
+**Importance:** Security and authorization. Without these, the application cannot function.
+
+---
+
+### 🛠️ GitHub → Cloud Run: Auto-Deploy on Push
+Code pushed to GitHub auto-triggers a deployment to Cloud Run.  
+**Importance:** Ensures the app is always live with the latest changes and enables CI/CD.
+
+---
+
+### 📦 Cloud Run → New Revision: Deploy Updates
+Every deployment creates a new revision in Cloud Run.  
+**Importance:** Enables versioning, rollbacks, and stability during updates.
+
+---
+
+### 🚦 Latest Revision → Traffic Management
+Cloud Run routes 100% of user traffic to the latest deployed revision.  
+**Importance:** Ensures users always access the most updated version of the application.
+
+---
+
+## ⚙️ Implementation Breakdown
+
+### 1. Users (Interacting with the App)
+**Frontend:** HTML form to upload images via `/` endpoint.  
+**Uploads:** Supports JPEG and PNG files.  
+- **POST request** uploads the image.
+- **GET request** lets users view the image + metadata.
+- Endpoint `/files/<filename>` serves metadata from JSON.
+
+**How it works:**  
+- User uploads → backend sends to GCS → Gemini generates metadata → app fetches metadata + displays it.
+
+---
+
+### 2. Cloud Run (Deployment Platform)
+**Framework:** Flask App  
+**Port:** 8080 (default for Cloud Run)  
+**Deployment:** Cloud Run handles auto-scaling, traffic routing, HTTPS access.  
+**No firewall config needed.**  
+**How it helps:** No manual infrastructure setup, reliable public endpoint, autoscaling.
+
+---
+
+### 3. Google Cloud Storage (Bucket)
+**Purpose:** Stores both image files and JSON metadata.  
+**Bucket Setup:**  
+- Uses environment variable `BUCKET_NAME`  
+- Private access by default  
+**Storage Logic:**  
+- Uploaded image → stored as `.jpg` or `.png`  
+- Metadata → stored as `.json` (same name)
+
+**How it helps:**  
+Links every image to a context-rich JSON file. Fast, durable, and scalable.
+
+---
+
+### 4. Gemini API (Metadata Generator)
+**Function:** Takes an image and returns a title + description.  
+**API Key:** Stored in `GEMINI_API_KEY` env variable.  
+```python
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+
+### ⚙️ 5. GitHub Repository Integration
+
+Below three files are required to deploy the current web application to **Cloud Run**:
+
+- `main.py` — Main Flask application
+- `requirements.txt` — Python dependencies
+- `Procfile` — Deployment command using Gunicorn
+
+**Relation to Application:**  
+Cloud Run is connected to the GitHub repository for continuous deployment. When new code (e.g., updates to `main.py`) is pushed, Cloud Run auto-deploys a new revision.
+
+---
+
+### 🔄 6. Latest Deployed Revision
+
+Every new push to the repo triggers a **new revision** in Cloud Run.  
+Each revision is timestamped and assigned a unique ID.
+[Deployed Revisions](screenshots/Picture3.jpg)
+**Relation to Application:**  
+Revisions act as immutable snapshots of the app state. This allows for:
+- Easy rollback to previous versions
+- Continuous integration and delivery
+- Safer updates without downtime
+
+---
+
+### 🚦 7. Traffic Management
+
+Cloud Run routes 100% of traffic to the **latest deployed revision** by default.  
+This can be configured manually in the **"Manage Traffic"** section of Cloud Run.
+
+**Relation to Application:**  
+Only the newest version (e.g., with updated UI like white background) receives traffic, while older versions are retained for potential rollback. This ensures:
+- Consistent user experience
+- Fast feature delivery
+- Rollback safety during issues
+
+---
+
+## 🗂️ Project Structure
+
+
 ## 🧠 Tech Stack
 
 - Google Cloud Run  
