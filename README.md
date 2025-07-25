@@ -179,10 +179,9 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ### Project Structure
 
 deployment/
-│
-├── main.py # Main application logic (Flask app routes and functionality)
-├── Procfile # Specifies how the application should be run on Cloud Run
-└── requirements.txt # Python dependencies required for the app
+main.py # Main application logic (Flask app routes and functionality)
+Procfile # Specifies how the application should be run on Cloud Run
+requirements.txt # Python dependencies required for the app
 
 ---
 
