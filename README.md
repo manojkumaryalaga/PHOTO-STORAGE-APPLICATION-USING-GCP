@@ -132,36 +132,44 @@ Cloud Run routes 100% of user traffic to the latest deployed revision.
 - Uploaded image → stored as `.jpg` or `.png`  
 - Metadata → stored as `.json` (same name)
 
-How it helps: Links every image to a context-rich JSON file. Fast, durable, and scalable.
+**How it helps:** Links every image to a context-rich JSON file. Fast, durable, and scalable.
+
 ---
 
 ### 4. Gemini API (Image Metadata Generation)
-**Function:** Sends uploaded images to Gemini API to generate a title and description.  
+**Function:** Sends uploaded images to Gemini API to generate a title and description.Gemini API returns a title and description for each uploaded image 
 **API Key:** Stored in environment variable `GEMINI_API_KEY`.  
 **Example:**  
 ```python
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ```
 ---
-Function: Gemini API returns a title and description for each uploaded image.
-Storage: Parses and saves this metadata as a JSON file in Google Cloud Storage linked to the image.
-How it helps: Automatically generates meaningful metadata for every uploaded image.
+**Storage:** Parses and saves this metadata as a JSON file in Google Cloud Storage linked to the image.  
+**How it helps:** Automatically generates meaningful metadata for every uploaded image.
+
 ---
-5. GitHub Repository
-Files: Contains three files needed to deploy the current web application to Cloud Run.
-Deployment: Connected to Cloud Run for continuous deployment; pushing updates to main.py triggers automatic deployment.
-How it helps: Ensures seamless, automated deployment without manual steps.
+### 5. GitHub Repository  
+**Files:** Contains three files needed to deploy the current web application to Cloud Run.  
+**Deployment:** Connected to Cloud Run for continuous deployment; pushing updates to `main.py` triggers automatic deployment.  
+**How it helps:** Ensures seamless, automated deployment without manual steps.
+
 ---
-6. Latest Deployed Revision
-Details: Each deployment gets a unique revision ID that appears above previous revisions.
-Purpose: Each revision is a snapshot of the app at deployment time, preserving previous versions for reference or rollback.
-How it helps: Enables version control and easy rollback.
+
+### 6. Latest Deployed Revision  
+![Revisions Deployed](screenshots/Picture3.jpg)
+**Details:** Each deployment gets a unique revision ID that appears above previous revisions.  
+**Purpose:** Each revision is a snapshot of the app at deployment time, preserving previous versions for reference or rollback.  
+**How it helps:** Enables version control and easy rollback.
+
 ---
-7. Traffic Management
-Current Setup: 100% of user traffic is routed to the latest deployed revision with a white background.
-Older Revisions: Displayed with green or blue backgrounds, inactive but available for rollback.
-How it helps: Controls which app version users interact with, ensuring they see the latest features and UI consistently.
+
+### 7. Traffic Management  
+**Current Setup:** 100% of user traffic is routed to the latest deployed revision with a white background.  
+**Older Revisions:** Displayed with green or blue backgrounds, inactive but available for rollback.  
+**How it helps:** Controls which app version users interact with, ensuring they see the latest features and UI consistently.
+
 ---
+
 
  
 
