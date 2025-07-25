@@ -142,7 +142,7 @@ Links every image to a context-rich JSON file. Fast, durable, and scalable.
 **API Key:** Stored in `GEMINI_API_KEY` env variable.  
 ```python
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-
+---
 ### ⚙️ 5. GitHub Repository Integration
 
 Below three files are required to deploy the current web application to **Cloud Run**:
