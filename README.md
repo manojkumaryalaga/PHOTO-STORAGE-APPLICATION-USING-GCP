@@ -47,7 +47,7 @@ This automation streamlines development and ensures efficient, hands-free update
 ---
 ## Architecture
 
-![Architecture Diagram](screenshots/Picture1.png)
+![Architecture Diagram](Screenshots/Picture1.jpg)
 ---
 
 ## 🧠 Tech Stack
