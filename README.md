@@ -233,38 +233,49 @@ deployment/
   ```
   ---
 ## Instructions to Start/Deploy the Application
-Steps to deploy using Google Cloud Shell:
----
-1.Set the working directory to the project folder:
+
+# Set the working directory to the project folder
 cd path/to/directory
----
-2.Navigate to the application folder (in this project, it’s named deployment):
+
+# Navigate to the application folder (in this project, it’s named deployment)
 cd deployment
-3.Before testing locally, create and download the Google service account key JSON file. Set the path to this key in the shell:
-export GOOGLE_APPLICATION_CREDENTIALS=path/to/downloaded-keyfile.json (for mac)
-set GOOGLE_APPLICATION_CREDENTIALS=path/to/downloaded-keyfile.json (for Windows)
-4.Automatically generate the requirements.txt file with installed dependencies:
+
+# Before testing locally, create and download the Google service account key JSON file.
+# Set the path to this key in the shell:
+# For macOS/Linux:
+export GOOGLE_APPLICATION_CREDENTIALS=path/to/downloaded-keyfile.json
+# For Windows (cmd):
+set GOOGLE_APPLICATION_CREDENTIALS=path\to\downloaded-keyfile.json
+
+# Automatically generate the requirements.txt file with installed dependencies
 pip freeze > requirements.txt
-5.Verify dependencies and versions included in requirements.txt:
+
+# Verify dependencies and versions included in requirements.txt
 pip freeze
-6.Create a Procfile with the following content to deploy the Flask app on Cloud Run using Gunicorn:
-web: gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
-7.Export necessary environment variables before running the app locally (replace with your actual keys):
+
+# Create a Procfile with the following content to deploy the Flask app on Cloud Run using Gunicorn:
+# web: gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
+
+# Export necessary environment variables before running the app locally (replace with your actual keys)
 export GEMINI_API_KEY=your_gemini_api_key
 export PROJECT_ID=your_project_id
 export BUCKET_NAME=your_bucket_name
-8.Test the app locally on your machine:
+
+# Test the app locally on your machine
 python main.py
-9.Authenticate with Google Cloud and set your project:
+
+# Authenticate with Google Cloud and set your project
 gcloud auth login
 gcloud config set project YOUR_PROJECT_ID
-10.Deploy the application to Cloud Run, including environment variables (adjust service-name and region):
+
+# Deploy the application to Cloud Run, including environment variables (adjust service-name and region)
 gcloud run deploy service-name \
   --source . \
   --region your-region \
   --platform managed \
   --allow-unauthenticated \
   --set-env-vars GEMINI_API_KEY=your_gemini_api_key,PROJECT_ID=your_project_id,BUCKET_NAME=your_bucket_name
+
 ---
 
 
