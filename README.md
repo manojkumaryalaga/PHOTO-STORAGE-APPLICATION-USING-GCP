@@ -166,6 +166,10 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ---
 
 ### 7. Traffic Management  
+---
+![Revisions Deployed](screenshots/Picture5.jpg)
+![Revisions Deployed](screenshots/Picture6.png)
+---
 **Current Setup:** 100% of user traffic is routed to the latest deployed revision with a white background.  
 **Older Revisions:** Displayed with green or blue backgrounds, inactive but available for rollback.  
 **How it helps:** Controls which app version users interact with, ensuring they see the latest features and UI consistently.
