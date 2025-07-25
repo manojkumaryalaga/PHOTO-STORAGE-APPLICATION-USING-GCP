@@ -234,8 +234,10 @@ deployment/
   ---
 ## Instructions to Start/Deploy the Application
 Steps to deploy using Google Cloud Shell:
+---
 1.Set the working directory to the project folder:
 cd path/to/directory
+---
 2.Navigate to the application folder (in this project, it’s named deployment):
 cd deployment
 3.Before testing locally, create and download the Google service account key JSON file. Set the path to this key in the shell:
