@@ -304,6 +304,49 @@ gcloud run deploy service-name \
 
 ---
 
+## Using the Application
+
+1. Once the Cloud Run service link is active, authorized users can access the deployed app. Users click the "Choose File" button to select an image from their local machine and then use the "Upload" button to upload the image.
+---
+![](screenshots/Picture7.jpg)
+---
+2. After a successful upload, the image status is confirmed by seeing it appear as a clickable link below the upload button. (For example, the screenshot shows 8 images with names like download.jpg, download.jpeg.)
+
+3. Clicking the link of any uploaded image displays the image content along with its generated title and description below it.
+
+4. The uploaded image file, along with the corresponding JSON metadata file sharing the same name, can be verified in the specified Google Cloud Storage bucket.
+
+5. Clicking the URL link of the JSON file in the bucket or downloading it will show content (title and description) that exactly matches what is displayed for the image.
+
+---
+
+## Lessons Learned
+
+- Integrating Google Gemini AI for dynamic image description generation provided practical experience with AI-powered services, but also presented challenges with inconsistent AI responses.
+- To improve robustness, error-handling and retry logic were implemented.
+- Debugging and error handling during deployment to Cloud Run proved essential, highlighting the importance of reviewing logs to resolve issues.
+- Integrating the GitHub repository with Cloud Run enabled seamless automatic deployment where every commit to `main.py` creates a new revision of the service.
+
+---
+
+## Areas to Improve
+
+- Moving Gemini API metadata generation to background tasks or queue systems like Cloud Pub/Sub could reduce delays or timeouts during high traffic.
+- Implementing efficient storage management and automatic rules for older files would improve scalability.
+- Adding user authentication (e.g., OAuth2) is important to secure the system and prevent unauthorized access.
+- Improving the frontend UI with upload progress bars or image previews would enhance user experience.
+- Introducing backend monitoring tools and error reporting would help detect and fix issues proactively.
+- Storing metadata in BigQuery would facilitate easier searching and analysis for future scalability.
+
+---
+
+## Scalability and Success Potential
+
+- The application can handle millions of users due to Google Cloud Run’s automatic scaling based on traffic.
+- Cloud Storage offers reliable, scalable storage for images and metadata, suitable for large data volumes.
+- The automated deployment pipeline ensures efficient updates with minimal downtime.
+- For sustained success at scale, enhancements such as authentication, rate limiting, improved error handling, and monitoring will be crucial.
+- With these improvements, the application can remain stable, secure, and responsive as the user base grows.
 
  
 
