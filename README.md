@@ -168,6 +168,7 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ### 7. Traffic Management  
 ---
 ![Revisions Deployed](screenshots/Picture5.jpg)
+---
 ![Revisions Deployed](screenshots/Picture6.png)
 ---
 **Current Setup:** 100% of user traffic is routed to the latest deployed revision with a white background.  
@@ -175,6 +176,58 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 **How it helps:** Controls which app version users interact with, ensuring they see the latest features and UI consistently.
 
 ---
+### Project Structure
+
+deployment/
+│
+├── main.py # Main application logic (Flask app routes and functionality)
+├── Procfile # Specifies how the application should be run on Cloud Run
+└── requirements.txt # Python dependencies required for the app
+
+---
+
+---
+
+# Pros
+
+- Cloud Run dynamically adjusts to traffic, ensuring the app scales based on the number of requests, especially useful for fluctuating workloads.
+- Cloud Run instances are stateless, allowing multiple instances to handle requests concurrently without affecting functionality.
+- Google Cloud Storage (GCS) stores images, making them globally accessible to any instance, preventing data loss during scaling.
+- Deployment is straightforward using `gcloud run deploy` and can be done directly from the source directory.
+- Images and metadata stored in Cloud Storage allow users to access uploaded content seamlessly from any instance.
+- The app integrates well with Google services like Cloud Storage and Gemini AI for efficient operations.
+- Changes pushed to GitHub trigger automatic deployment to Cloud Run, reducing manual steps and enabling continuous delivery.
+- All traffic is routed to the most recent revision, ensuring users experience the latest features and updates.
+- Older revisions remain inactive but are retained for rollback if needed, maintaining operational safety.
+- The application scales automatically based on incoming traffic, ensuring consistent performance regardless of demand.
+- Manual traffic controls allow quick reassignment of traffic to previous revisions if rollback is necessary.
+
+---
+
+# Cons
+
+- Due to Cloud Run’s stateless nature, user sessions and context might be lost when requests route between different instances.
+- Cold starts can cause delays when new instances spin up after idle periods.
+- Distributed handling of requests may cause issues with user session continuity.
+- High upload frequency or heavy traffic can lead to throttling or delays accessing Cloud Storage, especially for large files.
+- Uploading and processing large images may increase response times and latency.
+- The solution lacks built-in user authentication; custom security must be implemented.
+- Instances are ephemeral, so any data stored locally is lost on scale down, complicating state management.
+- Relying on the latest deployed revision means any bugs affect all users immediately.
+- If the latest revision fails, users experience downtime until traffic is manually redirected, possibly degrading user experience.
+
+---
+
+# Problems Encountered and Solutions
+
+- **Issue:** Gunicorn error "worker spawn failed" and Pillow library not recognized.  
+  **Solution:** Used `pip freeze` to verify dependency versions and updated `requirements.txt` accordingly, fixing Pillow version.  
+
+- **Issue:** `main.py` bound to fixed port (5000) incompatible with Cloud Run dynamic ports.  
+  **Solution:** Modified `main.py` to bind dynamically to the environment’s assigned port by using:  
+  ```python
+  app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+
 
 
  
