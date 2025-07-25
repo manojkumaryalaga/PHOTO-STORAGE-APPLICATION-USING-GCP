@@ -238,9 +238,11 @@ deployment/
 
 cd path/to/directory
 
+
 2.Navigate to the application folder (in this project, it’s named deployment)
 
 cd deployment
+
 
 3.Before testing locally, create and download the Google service account key JSON file.
 
@@ -254,19 +256,23 @@ For Windows (cmd):
 
 set GOOGLE_APPLICATION_CREDENTIALS=path\to\downloaded-keyfile.json
 
-Automatically generate the requirements.txt file with installed dependencies
+
+4.Automatically generate the requirements.txt file with installed dependencies
 
 pip freeze > requirements.txt
 
-Verify dependencies and versions included in requirements.txt
+
+5.Verify dependencies and versions included in requirements.txt
 
 pip freeze
 
-Create a Procfile with the following content to deploy the Flask app on Cloud Run using Gunicorn:
+
+6.Create a Procfile with the following content to deploy the Flask app on Cloud Run using Gunicorn:
 
 web: gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
 
-Export necessary environment variables before running the app locally (replace with your actual keys)
+
+7.Export necessary environment variables before running the app locally (replace with your actual keys)
 
 export GEMINI_API_KEY=your_gemini_api_key
 
@@ -274,17 +280,20 @@ export PROJECT_ID=your_project_id
 
 export BUCKET_NAME=your_bucket_name
 
-Test the app locally on your machine
+
+8.Test the app locally on your machine
 
 python main.py
 
-Authenticate with Google Cloud and set your project
+
+9.Authenticate with Google Cloud and set your project
 
 gcloud auth login
 
 gcloud config set project YOUR_PROJECT_ID
 
-Deploy the application to Cloud Run, including environment variables (adjust service-name and region)
+
+10.Deploy the application to Cloud Run, including environment variables (adjust service-name and region)
 
 gcloud run deploy service-name \
   --source . \
