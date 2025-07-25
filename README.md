@@ -132,8 +132,7 @@ Cloud Run routes 100% of user traffic to the latest deployed revision.
 - Uploaded image → stored as `.jpg` or `.png`  
 - Metadata → stored as `.json` (same name)
 
-**How it helps:**  
-Links every image to a context-rich JSON file. Fast, durable, and scalable.
+How it helps: Links every image to a context-rich JSON file. Fast, durable, and scalable.
 ---
 
 ### 4. Gemini API (Image Metadata Generation)
