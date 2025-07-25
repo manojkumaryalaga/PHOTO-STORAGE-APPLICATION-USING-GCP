@@ -235,73 +235,73 @@ deployment/
 ## Instructions to Start/Deploy the Application
 
 1.Set the working directory to the project folder
-
+```python
 cd path/to/directory
-
+```
 
 2.Navigate to the application folder (in this project, it’s named deployment)
-
+```python
 cd deployment
-
+```
 
 3.Before testing locally, create and download the Google service account key JSON file.
 
 Set the path to this key in the shell:
 
 For macOS/Linux:
-
+```python
 export GOOGLE_APPLICATION_CREDENTIALS=path/to/downloaded-keyfile.json
-
+```
 For Windows (cmd):
-
+```python
 set GOOGLE_APPLICATION_CREDENTIALS=path\to\downloaded-keyfile.json
-
+```
 
 4.Automatically generate the requirements.txt file with installed dependencies
-
+```python
 pip freeze > requirements.txt
-
+```
 
 5.Verify dependencies and versions included in requirements.txt
-
+```python
 pip freeze
-
+```
 
 6.Create a Procfile with the following content to deploy the Flask app on Cloud Run using Gunicorn:
-
+```python
 web: gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
-
+```
 
 7.Export necessary environment variables before running the app locally (replace with your actual keys)
-
+```python
 export GEMINI_API_KEY=your_gemini_api_key
 
 export PROJECT_ID=your_project_id
 
 export BUCKET_NAME=your_bucket_name
-
+```
 
 8.Test the app locally on your machine
-
+```python
 python main.py
-
+```
 
 9.Authenticate with Google Cloud and set your project
-
+```python
 gcloud auth login
 
 gcloud config set project YOUR_PROJECT_ID
-
+```
 
 10.Deploy the application to Cloud Run, including environment variables (adjust service-name and region)
-
+```python
 gcloud run deploy service-name \
   --source . \
   --region your-region \
   --platform managed \
   --allow-unauthenticated \
   --set-env-vars GEMINI_API_KEY=your_gemini_api_key,PROJECT_ID=your_project_id,BUCKET_NAME=your_bucket_name
-
+```
 ---
 
 ## Using the Application
@@ -311,13 +311,23 @@ gcloud run deploy service-name \
 ![](screenshots/Picture7.jpg)
 ---
 2. After a successful upload, the image status is confirmed by seeing it appear as a clickable link below the upload button. (For example, the screenshot shows 8 images with names like download.jpg, download.jpeg.)
+---
+![](screenshots/Picture8.png)
+---
 
 3. Clicking the link of any uploaded image displays the image content along with its generated title and description below it.
-
+---
+![](screenshots/Picture9.jpg)
+---
 4. The uploaded image file, along with the corresponding JSON metadata file sharing the same name, can be verified in the specified Google Cloud Storage bucket.
-
+---
+![](screenshots/Picture10.jpg)
+---
 5. Clicking the URL link of the JSON file in the bucket or downloading it will show content (title and description) that exactly matches what is displayed for the image.
-
+---
+![](screenshots/Picture11.jpg)
+![](screenshots/Picture12.jpg)
+---
 ---
 
 ## Lessons Learned
