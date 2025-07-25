@@ -26,28 +26,7 @@ This automation streamlines development and ensures **hands-free updates** to th
 
 ---
 
-## 📸 Screenshots
 
-### 1. Web Application Interface  
-![Web Interface](screenshots/web_interface.png)
-
-### 2. Image Upload to Google Cloud Storage  
-![GCS Upload](screenshots/gcs_upload.png)
-
-### 3. Gemini API Generated Metadata  
-![Metadata JSON](screenshots/gemini_metadata.png)
-
-### 4. Image Display with Title & Description  
-![Image Display](screenshots/image_display_with_metadata.png)
-
-### 5. Google Cloud Run Deployment  
-![Cloud Run](screenshots/cloud_run_deployment.png)
-
-### 6. Cloud Run Revisions and Traffic  
-![Revisions](screenshots/cloud_run_revisions.png)
-
-### 7. GitHub CI/CD Integration  
-![CI/CD](screenshots/github_ci_cd.png)
 
 ---
 
