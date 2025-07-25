@@ -156,7 +156,9 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ---
 
 ### 6. Latest Deployed Revision  
+---
 ![Revisions Deployed](screenshots/Picture3.jpg)
+---
 **Details:** Each deployment gets a unique revision ID that appears above previous revisions.  
 **Purpose:** Each revision is a snapshot of the app at deployment time, preserving previous versions for reference or rollback.  
 **How it helps:** Enables version control and easy rollback.
