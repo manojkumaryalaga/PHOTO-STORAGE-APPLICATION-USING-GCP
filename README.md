@@ -1,4 +1,3 @@
-# 📁 PROJECT - PHOTO STORAGE APPLICATION
 
 ## Introduction
 
