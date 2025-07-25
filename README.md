@@ -187,10 +187,6 @@ deployment/
 ├── Procfile # Specifies how the application should be run on Cloud Run
 ---
 └── requirements.txt # Python dependencies required for the app
----
-
-
----
 
 ---
 
