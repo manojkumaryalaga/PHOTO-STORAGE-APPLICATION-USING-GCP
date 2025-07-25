@@ -134,76 +134,16 @@ Cloud Run routes 100% of user traffic to the latest deployed revision.
 
 **How it helps:**  
 Links every image to a context-rich JSON file. Fast, durable, and scalable.
-
 ---
 
-### 4. Gemini API (Metadata Generator)
-**Function:** Takes an image and returns a title + description.  
-**API Key:** Stored in `GEMINI_API_KEY` env variable.  
+### 4. Gemini API (Image Metadata Generation)
+**Function:** Sends uploaded images to Gemini API to generate a title and description.  
+**API Key:** Stored in environment variable `GEMINI_API_KEY`.  
+**Example:**  
 ```python
--genai.configure(api_key=os.environ["GEMINI_API_KEY"])
----
----
-
-### ⚙️ 5. GitHub Repository Integration
-
-The following three files are required to deploy the current web application to **Google Cloud Run**:
-
-- `main.py` — Main Flask application  
-- `requirements.txt` — Python dependencies  
-- `Procfile` — Deployment command using Gunicorn  
-
-**Relation to Application:**  
-Cloud Run is connected to the GitHub repository for continuous deployment. When new code (e.g., updates to `main.py`) is pushed, Cloud Run automatically deploys a new revision.
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 ---
 
-### 🔄 6. Latest Deployed Revision
-
-Each push to the GitHub repository triggers a **new revision** in Cloud Run.  
-Each revision is timestamped and assigned a unique ID.
-
-![Deployed Revision](screenshots/Picture3.jpg)
-
-**Relation to Application:**  
-Revisions act as immutable snapshots of the application state, allowing:  
-- Easy rollback to previous versions  
-- Continuous integration and delivery  
-- Safer updates without downtime  
-
----
-
-### 🚦 7. Traffic Management
-
-Cloud Run routes **100% of traffic** to the **latest deployed revision** by default.  
-This can be manually configured in the **"Manage Traffic"** section of the Cloud Run console.
-
-**Relation to Application:**  
-Only the newest version (e.g., with updated UI like a white background) receives traffic, while older versions are retained for potential rollback. This ensures:  
-- Consistent user experience  
-- Fast feature delivery  
-- Rollback safety during issues  
-
----
-
-### 🗂️ Project Structure
-
-
-
-
-## 🧠 Tech Stack
-
-- Google Cloud Run  
-- Google Cloud Storage  
-- Gemini API  
-- Python / Flask (or relevant backend framework)  
-- GitHub for version control and deployment automation  
-
----
-
-## 🚀 Live Demo
-
-🔗 [Your Deployed Web App Link Here](https://your-app-link)
-
----
+ 
 
