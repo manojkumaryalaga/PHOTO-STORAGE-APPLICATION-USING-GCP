@@ -45,9 +45,9 @@ This automation streamlines development and ensures efficient, hands-free update
 - **Revision management:** Google Cloud Run creates a new revision each time a change is committed to the integrated GitHub repository. The service automatically updates to the latest revision, maintaining the most current version of the application in production.
 
 ---
-## Architecture
+### Architecture
 
-![Architecture Diagram](Screenshots/Picture1.jpg)
+![Architecture Diagram](screenshots/Picture1.jpg)
 ---
 
 ## 🧠 Tech Stack
