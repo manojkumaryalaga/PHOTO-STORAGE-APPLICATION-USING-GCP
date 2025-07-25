@@ -234,6 +234,8 @@ deployment/
   ---
 ## Instructions to Start/Deploy the Application
 
+Run all the commands below in Google Cloud Shell Terminal
+
 1.Set the working directory to the project folder
 ```python
 cd path/to/directory
