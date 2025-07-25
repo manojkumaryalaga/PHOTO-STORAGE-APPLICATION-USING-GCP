@@ -143,12 +143,12 @@ Links every image to a context-rich JSON file. Fast, durable, and scalable.
 ```python
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ---
-### ⚙️ 5. GitHub Repository Integration
+## ⚙️ 5. GitHub Repository Integration
 
 Below three files are required to deploy the current web application to **Cloud Run**:
 
-- `main.py` — Main Flask application
-- `requirements.txt` — Python dependencies
+- `main.py` — Main Flask application  
+- `requirements.txt` — Python dependencies  
 - `Procfile` — Deployment command using Gunicorn
 
 **Relation to Application:**  
@@ -156,31 +156,36 @@ Cloud Run is connected to the GitHub repository for continuous deployment. When 
 
 ---
 
-### 🔄 6. Latest Deployed Revision
+## 🔄 6. Latest Deployed Revision
 
 Every new push to the repo triggers a **new revision** in Cloud Run.  
 Each revision is timestamped and assigned a unique ID.
-[Deployed Revisions](screenshots/Picture3.jpg)
+
+![Deployed Revision](screenshots/Picture3.jpg)
+
 **Relation to Application:**  
 Revisions act as immutable snapshots of the app state. This allows for:
-- Easy rollback to previous versions
-- Continuous integration and delivery
+- Easy rollback to previous versions  
+- Continuous integration and delivery  
 - Safer updates without downtime
 
 ---
 
-### 🚦 7. Traffic Management
+## 🚦 7. Traffic Management
 
 Cloud Run routes 100% of traffic to the **latest deployed revision** by default.  
 This can be configured manually in the **"Manage Traffic"** section of Cloud Run.
 
 **Relation to Application:**  
 Only the newest version (e.g., with updated UI like white background) receives traffic, while older versions are retained for potential rollback. This ensures:
-- Consistent user experience
-- Fast feature delivery
+- Consistent user experience  
+- Fast feature delivery  
 - Rollback safety during issues
 
 ---
+
+## 🗂️ Project Structure
+
 
 ## 🗂️ Project Structure
 
