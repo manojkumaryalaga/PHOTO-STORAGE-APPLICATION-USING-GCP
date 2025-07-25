@@ -141,7 +141,7 @@ Links every image to a context-rich JSON file. Fast, durable, and scalable.
 **Function:** Takes an image and returns a title + description.  
 **API Key:** Stored in `GEMINI_API_KEY` env variable.  
 ```python
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 ---
 ---
 
