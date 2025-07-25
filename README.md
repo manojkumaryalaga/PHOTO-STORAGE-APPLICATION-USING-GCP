@@ -28,26 +28,26 @@ This automation streamlines development and ensures efficient, hands-free update
 ---
 ## Implemented Features
 
-- Image upload functionality: Users can select and upload images through a file upload interface.
+- **Image upload functionality:** Users can select and upload images through a file upload interface.
 
-- Cloud Storage integration: Uploaded images are securely stored in a Google Cloud Storage bucket.
+- **Cloud Storage integration:** Uploaded images are securely stored in a Google Cloud Storage bucket.
 
-- Gemini API integration: For each uploaded image, the Gemini API generates a title and description, which are stored as a JSON file in the same bucket with the same name as the image.
+- **Gemini API integration:** For each uploaded image, the Gemini API generates a title and description, which are stored as a JSON file in the same bucket with the same name as the image.
 
-- Image display and interaction: Uploaded images are shown as clickable links. Clicking on a link opens the image along with its generated metadata (title and description).
+- **Image display and interaction:** Uploaded images are shown as clickable links. Clicking on a link opens the image along with its generated metadata (title and description).
 
-- Scalable deployment: The application is deployed on Google Cloud Run, allowing it to scale automatically based on traffic, ensuring high availability and performance.
+- **Scalable deployment:** The application is deployed on Google Cloud Run, allowing it to scale automatically based on traffic, ensuring high availability and performance.
 
-- Automated deployment: Any changes made to the GitHub repository are automatically deployed to the Cloud Run service. When a commit is pushed, a new revision is created and deployed without the need for manual steps, ensuring the application stays updated.
+- **Automated deployment:** Any changes made to the GitHub repository are automatically deployed to the Cloud Run service. When a commit is pushed, a new revision is created and deployed without the need for manual steps, ensuring the application stays updated.
 
-- Traffic management: The traffic is set to 100% for the latest deployed revision, ensuring that all users access the most up-to-date version of the application.
+- **Traffic management:** The traffic is set to 100% for the latest deployed revision, ensuring that all users access the most up-to-date version of the application.
 
-- Revision management: Google Cloud Run creates a new revision each time a change is committed to the integrated GitHub repository. The service automatically updates to the latest revision, maintaining the most current version of the application in production.
+- **Revision management:** Google Cloud Run creates a new revision each time a change is committed to the integrated GitHub repository. The service automatically updates to the latest revision, maintaining the most current version of the application in production.
 
 ---
 ## Architecture
 
-![Architecture Diagram](screenshots/picture1.png)
+![Architecture Diagram](screenshots/Picture1.png)
 ---
 
 ## 🧠 Tech Stack
