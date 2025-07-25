@@ -339,15 +339,6 @@ gcloud run deploy service-name \
 
 ---
 
-## Areas to Improve
-
-- Moving Gemini API metadata generation to background tasks or queue systems like Cloud Pub/Sub could reduce delays or timeouts during high traffic.
-- Implementing efficient storage management and automatic rules for older files would improve scalability.
-- Adding user authentication (e.g., OAuth2) is important to secure the system and prevent unauthorized access.
-- Improving the frontend UI with upload progress bars or image previews would enhance user experience.
-- Introducing backend monitoring tools and error reporting would help detect and fix issues proactively.
-- Storing metadata in BigQuery would facilitate easier searching and analysis for future scalability.
-
 ---
 
 ## Scalability and Success Potential
