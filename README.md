@@ -14,15 +14,15 @@ This automation streamlines development and ensures efficient, hands-free update
 
 ## 🎯 Goals and Objectives
 
-- ✅ Deploy a scalable and user-friendly web application using Google Cloud Run.
-- ✅ Enable users to upload images through the web application.
-- ✅ Store uploaded images securely in Google Cloud Storage.
-- ✅ Integrate the Gemini API to generate metadata (title and description) for each image and store it as a JSON file.
-- ✅ Display uploaded images as clickable links for easy access and viewing.
-- ✅ Ensure that clicking on an image shows both the image and its associated metadata.
-- ✅ Implement a deployment process using Cloud Run's revision and traffic management.
-- ✅ Set traffic to 100% for the latest revision to ensure users always access the newest version.
-- ✅ Automate deployment so that any GitHub push triggers an auto-deploy to Cloud Run.
+- Deploy a scalable and user-friendly web application using Google Cloud Run.
+- Enable users to upload images through the web application.
+- Store uploaded images securely in Google Cloud Storage.
+- Integrate the Gemini API to generate metadata (title and description) for each image and store it as a JSON file.
+- Display uploaded images as clickable links for easy access and viewing.
+- Ensure that clicking on an image shows both the image and its associated metadata.
+- Implement a deployment process using Cloud Run's revision and traffic management.
+- Set traffic to 100% for the latest revision to ensure users always access the newest version.
+- Automate deployment so that any GitHub push triggers an auto-deploy to Cloud Run.
 
 ---
 ## Implemented Features
